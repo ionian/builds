@@ -1,0 +1,63 @@
+pkgname=dwm
+pkgver=6.0
+pkgrel=2
+pkgdesc="A dynamic window manager for X"
+url="http://dwm.suckless.org"
+arch=('i686' 'x86_64')
+license=('MIT')
+options=(zipman)
+depends=('libx11' 'libxinerama')
+install=dwm.install
+source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
+	dwm.desktop
+	config.h)
+_patches=(01.Setup.makefiles.patch
+          02.Base.config.changes.patch
+          03.New.master.patch
+          04.Xft.patch
+          05.Statuscolours.patch
+          06.Cycle.patch
+          07.Push.patch
+          08.Fibonacci.patch)
+source=(${source[@]} ${_patches[@]})
+
+build() {
+  cd $srcdir/$pkgname-$pkgver
+
+
+  for p in "${_patches[@]}"; do
+    echo "=> $p"
+    patch < ../$p || return 1
+  done
+
+  cp $srcdir/config.h config.h
+  cp $srcdir/bstack.c bstack.c
+  cp $srcdir/gaplessgrid.c gaplessgrid.c
+  cp $srcdir/push.c push.c
+
+  sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
+  sed -i 's/^CFLAGS = -g/#CFLAGS += -g/g' config.mk
+  sed -i 's/^#CFLAGS = -std/CFLAGS += -std/g' config.mk
+  sed -i 's/^LDFLAGS = -g/#LDFLAGS += -g/g' config.mk
+  sed -i 's/^#LDFLAGS = -s/LDFLAGS += -s/g' config.mk
+  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+  cd $srcdir/$pkgname-$pkgver
+  make PREFIX=/usr DESTDIR=$pkgdir install
+  install -m644 -D LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
+  install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
+  install -m644 -D $srcdir/dwm.desktop $pkgdir/usr/share/xsessions/dwm.desktop
+}
+md5sums=('8bb00d4142259beb11e13473b81c0857'
+         '939f403a71b6e85261d09fc3412269ee'
+         '2453e037f46449774ec8afab49b4f1a2'
+         'aafac72d622d4aaa72ce245b0507a101'
+         '3c990ed61443d2972623fa2ff44324b4'
+         'e4f46d6507d3cfbb475d90c9e1276f13'
+         '715bc259fefea502b9273ac7615a3cc0'
+         'a4be168f9fa6a0c948bb0775f09b7111'
+         'b91fd453c83b2ccffc0a07fd3e3e20e9'
+         '9f26576300877000398be1d77cfb35e4'
+         '67d24f4d991a08430969bbf4467c74a6')
