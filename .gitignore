@@ -21,3 +21,9 @@
 !dwm-6.0-current/*.c 
 !dwm-6.0-current/*.h
 !dwm-6.0-current/*.patch
+!dwm-6.0-source/config.h 
+!dwm-6.0-source/config.def.h 
+!dwm-6.0-source/Makefile 
+!dwm-6.0-source/*.c 
+!dwm-6.0-source/*.h
+!dwm-6.0-source/*.patch
