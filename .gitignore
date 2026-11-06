@@ -8,3 +8,16 @@
 !*.install
 !*.desktop
 !.gitignore
+!README
+!LICENSE
+
+# Allow the dwm directory itself 
+!dwm-6.0-current/ 
+
+# Allow specific dwm source, patch, and config files 
+!dwm-6.0-current/config.h 
+!dwm-6.0-current/config.def.h 
+!dwm-6.0-current/Makefile 
+!dwm-6.0-current/*.c 
+!dwm-6.0-current/*.h
+!dwm-6.0-current/*.patch
