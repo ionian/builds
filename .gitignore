@@ -27,3 +27,15 @@
 !dwm-6.0-source/*.c 
 !dwm-6.0-source/*.h
 !dwm-6.0-source/*.patch
+!dwm-6.0-tweak/config.h 
+!dwm-6.0-tweak/config.def.h 
+!dwm-6.0-tweak/Makefile 
+!dwm-6.0-tweak/*.c 
+!dwm-6.0-tweak/*.h
+!dwm-6.0-tweak/*.patch
+!dwm-6.1-tweak/config.h 
+!dwm-6.1-tweak/config.def.h 
+!dwm-6.1-tweak/Makefile 
+!dwm-6.1-tweak/*.c 
+!dwm-6.1-tweak/*.h
+!dwm-6.1-tweak/*.patch
